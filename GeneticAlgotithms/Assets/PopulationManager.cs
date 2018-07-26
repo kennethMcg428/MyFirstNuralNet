@@ -9,18 +9,20 @@ public class PopulationManager : MonoBehaviour
     public GameObject personPrefabl;
     public float populationSize = 10;
     List<GameObject> population = new List<GameObject>();
+    List<GameObject> oldPopulation = new List<GameObject>();
     public static float elasped = 0;
     int trialTime = 10;
     int Generation = 1;
     int displaysize;
     GUIStyle guiStyle = new GUIStyle();
+
     private void OnGUI()
     {
         guiStyle.fontSize = 50;
         guiStyle.normal.textColor = Color.white;
         GUI.Label(new Rect(10, 10, 100, 20), "Generation: " + Generation, guiStyle);
         GUI.Label(new Rect(10, 65, 100, 20), "Trial Time: " + (int)elasped, guiStyle);
-       // GUI.Label(new Rect(10, 110, 100, 20), "pop size " + displaysize, guiStyle);
+        GUI.Label(new Rect(10, 110, 100, 20), "pop size " + displaysize, guiStyle);
     }
 
     // Use this for initialization
@@ -31,6 +33,7 @@ public class PopulationManager : MonoBehaviour
             Vector3 pos = new Vector3(Random.Range(-9, 9), Random.Range(-4.5f, 4.5f), 0);
             GameObject currPerson = Instantiate(personPrefabl, pos, Quaternion.identity);
             currPerson.GetComponent<DNA>().ColorGene = new Vector3(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
+            currPerson.GetComponent<DNA>().scaleGene = Random.Range(.15f, .5f);
             population.Add(currPerson);
         }
        // InvokeRepeating("BreedNewPopulation", trialTime, trialTime);
@@ -50,6 +53,8 @@ public class PopulationManager : MonoBehaviour
             offspring.GetComponent<DNA>().ColorGene.x = Random.Range(0, 10) < 5 ? dna1.ColorGene.x : dna2.ColorGene.x;
             offspring.GetComponent<DNA>().ColorGene.y = Random.Range(0, 10) < 5 ? dna1.ColorGene.y : dna2.ColorGene.y;
             offspring.GetComponent<DNA>().ColorGene.z = Random.Range(0, 10) < 5 ? dna1.ColorGene.z : dna2.ColorGene.z;
+
+            offspring.GetComponent<DNA>().scaleGene = Random.Range(0, 10) < 5 ? dna1.scaleGene : dna2.scaleGene;
         }
         //random mutation
         else
@@ -57,6 +62,8 @@ public class PopulationManager : MonoBehaviour
             offspring.GetComponent<DNA>().ColorGene.x = Random.Range(0.0f, 1.0f);
             offspring.GetComponent<DNA>().ColorGene.y = Random.Range(0.0f, 1.0f);
             offspring.GetComponent<DNA>().ColorGene.z = Random.Range(0.0f, 1.0f);
+
+            offspring.GetComponent<DNA>().scaleGene = Random.Range(.05f, .4f);
         }
 
 
@@ -67,7 +74,7 @@ public class PopulationManager : MonoBehaviour
     {
         Generation++;
         elasped = 0.0f;
-        List<GameObject> NewPopulation = new List<GameObject>();
+        oldPopulation = population;
         List<GameObject> sortedList = population.OrderBy(o => o.GetComponent<DNA>().timeToDie).ToList();
         displaysize = (int)sortedList.Count;
         population.Clear();
@@ -76,30 +83,30 @@ public class PopulationManager : MonoBehaviour
             population.Add(Breed(sortedList[i], sortedList[i + 1]));
             population.Add(Breed(sortedList[i], sortedList[i + 1]));
         }
-        //foreach (GameObject person in sortedList)
-        //{
-        //    Destroy((GameObject)sortedList[sortedList.Count]);
-        //}
-        displaysize = sortedList.Count;
-        for (int j = 0; j < 10; j++)
+          foreach(GameObject pop in sortedList)
         {
-            Destroy((GameObject)sortedList[j]);
+            Destroy(pop);
         }
-        displaysize = sortedList.Count;
+        
     }
 
+    void KillOld(List<GameObject> pop)
+    {
+      
+    }
 
     // Update is called once per frame
     void Update()
     {
-
+        elasped += Time.deltaTime;
         if (elasped > trialTime)
         {
             BreedNewPopulation();
+            //KillOld();
             
         }
       
-            elasped += Time.deltaTime;
+            
         
     }
 }
