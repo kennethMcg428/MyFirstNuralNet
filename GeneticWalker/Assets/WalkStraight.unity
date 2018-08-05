@@ -191,7 +191,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 330727200}
   m_LocalRotation: {x: -0.16751574, y: 0.0020675762, z: -0.0003508525, w: -0.9858672}
-  m_LocalPosition: {x: 0.50883806, y: 1.8710804, z: -68.07789}
+  m_LocalPosition: {x: 0.50883806, y: 9.57, z: -77.167}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -355,7 +355,7 @@ Transform:
   m_GameObject: {fileID: 1064431641}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 13.762492}
+  m_LocalScale: {x: 1.5700523, y: 1, z: 13.762492}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -450,6 +450,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2009612176}
+  - component: {fileID: 2009612177}
   m_Layer: 0
   m_Name: PopulationManager
   m_TagString: Untagged
@@ -464,9 +465,23 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2009612175}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.1152635, y: -2.3409293, z: -67.16672}
+  m_LocalPosition: {x: -0.12, y: 1.49, z: -65.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2009612177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2009612175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bab6cae679c5ce64cb53dee27aaac240, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  botPrefab: {fileID: 1565522241125702, guid: 7d36b5f5cbe294f368cce70409a75a03, type: 2}
+  populationSize: 100
+  trialTime: 10
