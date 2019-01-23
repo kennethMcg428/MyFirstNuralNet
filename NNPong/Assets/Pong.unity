@@ -1102,7 +1102,7 @@ MonoBehaviour:
   ball: {fileID: 505796213}
   numSaved: 0
   numMissed: 0
-  learningRate: 0.01
+  learningRate: 0.02
 --- !u!4 &1368014449
 Transform:
   m_ObjectHideFlags: 0
